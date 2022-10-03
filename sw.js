@@ -1,16 +1,20 @@
-self.addEventListener("install", e => {
+const assets = [
+    "/",
+    "/index.html",
+    "./images/icon.png"
+]
+
+
+self.addEventListener("install", installEvent => {
     console.log("Install");
-    e.waitUntil(
+    installEvent.waitUntil(
         caches.open("static").then(cache => {
-            return cache.addAll([".", "./images/icon.png"])
+            return cache.addAll(assets)
 
         }))
 })
 
-self.addEventListener("fetch", e => {
-    console.log(`intercepting fetch request for ${e.request.url}`);
 
-})
 self.addEventListener("fetch", e => {
     console.log(`intercepting fetch request for ${e.request.url}`);
     e.respondWith(
